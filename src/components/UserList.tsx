@@ -3,7 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { fetchUsers } from '../services/api';
 import Loading from './Loading';
-import Navbar from './Navbar';
+import { Navbar } from './Navbar';
 import UserCard from './UserCard';
 import { User } from '../types/user';
 import { ApiError } from '../types/api';
