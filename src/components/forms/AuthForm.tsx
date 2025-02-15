@@ -14,8 +14,8 @@ interface AuthFormProps {
 export function AuthForm({ onSubmit, type, error }: AuthFormProps) {
   const methods = useForm<AuthFormData>({
     resolver: zodResolver(authSchema),
-    mode: 'onTouched',
-    delayError: 500,
+    mode: 'onChange',
+    criteriaMode: 'all',
   });
 
   const handleSubmit = async (data: AuthFormData) => {

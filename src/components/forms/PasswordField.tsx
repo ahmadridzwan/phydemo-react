@@ -17,9 +17,9 @@ export function PasswordField({
   placeholder,
   showRequirements,
 }: PasswordFieldProps) {
-  const [isFocused, setIsFocused] = useState(false);
-  const { watch } = useFormContext();
+  const { watch, formState } = useFormContext();
   const value = watch(name);
+  const fieldState = formState.dirtyFields[name];
 
   const passwordChecks = {
     length: (value?.length || 0) >= 8,
@@ -29,23 +29,22 @@ export function PasswordField({
     special: /[^A-Za-z0-9]/.test(value || ''),
   };
 
+  const allRequirementsMet = Object.values(passwordChecks).every(
+    (check) => check,
+  );
+
   return (
     <div className="space-y-2">
-      <div
-        onFocus={() => setIsFocused(true)}
-        onBlur={() => setIsFocused(false)}
-      >
-        <FormField
-          name={name}
-          label={label}
-          type="password"
-          placeholder={placeholder}
-        />
-      </div>
+      <FormField
+        name={name}
+        label={label}
+        type="password"
+        placeholder={placeholder}
+      />
 
       {showRequirements && value && <PasswordStrength password={value} />}
 
-      {showRequirements && isFocused && (
+      {showRequirements && fieldState && !allRequirementsMet && (
         <ul className="mt-2 space-y-1">
           <PasswordRequirement
             text="At least 8 characters long"
