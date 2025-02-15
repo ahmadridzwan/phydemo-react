@@ -1,19 +1,17 @@
 import { User } from './user';
 
-export interface ApiResponse<T> {
+export interface UsersResponse {
   page: number;
   per_page: number;
   total: number;
   total_pages: number;
-  data: T;
+  data: User[];
 }
-
-export interface UsersResponse extends ApiResponse<User[]> {}
 
 export class ApiError extends Error {
   constructor(
     message: string,
-    public status?: number,
+    public statusCode?: number,
     public code?: string,
   ) {
     super(message);

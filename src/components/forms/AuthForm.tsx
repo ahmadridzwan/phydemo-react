@@ -25,6 +25,7 @@ export function AuthForm({ onSubmit, type, error }: AuthFormProps) {
       methods.setError('root', {
         message: 'An error occurred during submission',
       });
+      console.error('Submission Error:', error);
     }
   };
 

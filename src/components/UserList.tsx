@@ -18,41 +18,43 @@ const UserList = () => {
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const loadUsers = async (pageToLoad: number) => {
-    if (loadingRef.current || !hasMore) return;
+  const loadUsers = useCallback(
+    async (pageToLoad: number) => {
+      if (loadingRef.current || !hasMore) return;
 
-    loadingRef.current = true;
-    setLoading(true);
-    setError(null);
+      loadingRef.current = true;
+      setLoading(true);
+      setError(null);
 
-    try {
-      const data = await fetchUsers(pageToLoad);
-      setUsers((prev) => [...prev, ...data.data]);
-      setPage(pageToLoad + 1);
-      setHasMore(data.page < data.total_pages);
-    } catch (error) {
-      const message =
-        error instanceof ApiError
-          ? error.message
-          : 'An unexpected error occurred';
-      setError(message);
-      setHasMore(false);
-    } finally {
-      setLoading(false);
-      loadingRef.current = false;
-    }
-  };
+      try {
+        const data = await fetchUsers(pageToLoad);
+        setUsers((prev) => [...prev, ...data.data]);
+        setPage(pageToLoad + 1);
+        setHasMore(data.page < data.total_pages);
+      } catch (error) {
+        const message =
+          error instanceof ApiError
+            ? error.message
+            : 'An unexpected error occurred';
+        setError(message);
+        setHasMore(false);
+      } finally {
+        setLoading(false);
+        loadingRef.current = false;
+      }
+    },
+    [hasMore],
+  );
 
   const checkShouldLoadMore = useCallback(() => {
     const container = containerRef.current;
     if (!container || loadingRef.current || !hasMore) return;
 
     const { scrollHeight, clientHeight } = container;
-    // If container is not full or very close to full, load more
     if (scrollHeight <= clientHeight + 100) {
       loadUsers(page);
     }
-  }, [page, hasMore]);
+  }, [page, hasMore, loadUsers]);
 
   const scrollToTop = () => {
     const container = containerRef.current;
@@ -86,9 +88,10 @@ const UserList = () => {
   };
 
   // Initial load effect
+
   useEffect(() => {
     loadUsers(1);
-  }, []);
+  }, [loadUsers]);
 
   // Check content height after users are updated
   useEffect(() => {
@@ -122,7 +125,7 @@ const UserList = () => {
       container.removeEventListener('scroll', handleScroll);
       resizeObserver.disconnect();
     };
-  }, [page, hasMore, checkShouldLoadMore]);
+  }, [page, hasMore, checkShouldLoadMore, loadUsers]);
 
   return (
     <main className="min-h-screen bg-gray-50">

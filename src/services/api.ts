@@ -3,9 +3,13 @@ import { UsersResponse, ApiError } from '../types/api';
 
 const API_BASE_URL = 'https://reqres.in/api';
 
+interface ErrorResponse {
+  message?: string;
+}
+
 const handleApiError = (error: unknown) => {
   if (axios.isAxiosError(error)) {
-    const axiosError = error as AxiosError;
+    const axiosError = error as AxiosError<ErrorResponse>;
     throw new ApiError(
       axiosError.response?.data?.message || 'An error occurred',
       axiosError.response?.status,
@@ -22,6 +26,6 @@ export const fetchUsers = async (page: number): Promise<UsersResponse> => {
     });
     return response.data;
   } catch (error) {
-    handleApiError(error);
+    throw handleApiError(error);
   }
 };
