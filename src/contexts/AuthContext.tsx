@@ -57,7 +57,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         router.push('/');
       }
     } catch (error) {
-      console.error('Error signing in:', error);
       throw error;
     }
   };
@@ -68,7 +67,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(null);
       router.push('/login');
     } catch (error) {
-      console.error('Error signing out:', error);
       throw error;
     }
   };

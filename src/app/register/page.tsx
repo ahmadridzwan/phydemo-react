@@ -17,8 +17,7 @@ export default function Register() {
       router.push('/');
       router.refresh();
     } catch (error) {
-      setError('Failed to create account');
-      console.error('Registration error:', error);
+      setError(`Failed to create account. Error: ${error}`);
     }
   };
 

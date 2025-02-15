@@ -15,8 +15,7 @@ export default function LoginPage() {
       setError('');
       await signIn(data.email, data.password);
     } catch (error) {
-      setError('Invalid email or password');
-      console.error('Login error:', error);
+      setError(`Invalid email or password. Error: ${error}`);
     }
   };
 
