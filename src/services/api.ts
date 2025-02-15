@@ -1,8 +1,7 @@
 import axios, { AxiosError } from 'axios';
 import { UsersResponse, ApiError } from '../types/api';
 
-const API_BASE_URL = 'https://reqres.in/api';
-
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL!;
 interface ErrorResponse {
   message?: string;
 }
