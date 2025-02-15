@@ -3,11 +3,15 @@ import { User } from '../types/user';
 
 interface UserCardProps {
   user: User;
+  onClick: (user: User) => void;
 }
 
-const UserCard = ({ user }: UserCardProps) => {
+const UserCard = ({ user, onClick }: UserCardProps) => {
   return (
-    <div className="p-6 border rounded-lg shadow-md flex flex-col items-center bg-white">
+    <div
+      className="p-6 border rounded-lg shadow-md flex flex-col items-center bg-white cursor-pointer hover:shadow-lg transition-shadow"
+      onClick={() => onClick(user)}
+    >
       <Image
         src={user.avatar}
         alt={`${user.first_name} ${user.last_name}`}

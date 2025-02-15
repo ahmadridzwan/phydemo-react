@@ -7,8 +7,10 @@ import { Navbar } from './Navbar';
 import UserCard from './UserCard';
 import { User } from '../types/user';
 import { ApiError } from '../types/api';
+import { useRouter } from 'next/navigation';
 
 const UserList = () => {
+  const router = useRouter();
   const [users, setUsers] = useState<User[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -87,6 +89,10 @@ const UserList = () => {
     setShowScrollTop(container.scrollTop > 500);
   };
 
+  const handleUserClick = (user: User) => {
+    router.push(`/users/${user.id}`);
+  };
+
   // Initial load effect
 
   useEffect(() => {
@@ -142,7 +148,11 @@ const UserList = () => {
           <div className="max-w-4xl mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {users.map((user, index) => (
-                <UserCard key={`${user.id}-${index}`} user={user} />
+                <UserCard
+                  key={`${user.id}-${index}`}
+                  user={user}
+                  onClick={handleUserClick}
+                />
               ))}
             </div>
             <div className="mt-6 flex justify-center">

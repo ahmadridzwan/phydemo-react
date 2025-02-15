@@ -2,12 +2,14 @@
 
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
+import { ReactNode } from 'react';
 
 interface NavbarProps {
   title?: string;
+  leftIcon?: ReactNode;
 }
 
-export function Navbar({ title }: NavbarProps) {
+export function Navbar({ title, leftIcon }: NavbarProps) {
   const { user, signOut } = useAuth();
 
   return (
@@ -15,7 +17,8 @@ export function Navbar({ title }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            {title && <h1 className="text-xl font-semibold">{title}</h1>}
+            {leftIcon}
+            {title && <h1 className="ml-2 text-xl font-semibold">{title}</h1>}
           </div>
 
           <div className="flex items-center">
