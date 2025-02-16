@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { ReactNode } from 'react';
+import { Button } from './ui/Button';
 
 interface NavbarProps {
   title?: string;
@@ -23,25 +24,16 @@ export function Navbar({ title, leftIcon }: NavbarProps) {
 
           <div className="flex items-center">
             {user ? (
-              <button
-                onClick={signOut}
-                className="text-gray-500 hover:text-gray-700 px-4 py-2 rounded-md border border-gray-300 hover:border-gray-400 transition-colors"
-              >
+              <Button onClick={signOut} variant="outline">
                 Sign out
-              </button>
+              </Button>
             ) : (
               <div className="space-x-4">
-                <Link
-                  href="/login"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Login
+                <Link href="/login">
+                  <Button variant="ghost">Login</Button>
                 </Link>
-                <Link
-                  href="/register"
-                  className="text-gray-600 hover:text-gray-900"
-                >
-                  Register
+                <Link href="/register">
+                  <Button variant="primary">Register</Button>
                 </Link>
               </div>
             )}
