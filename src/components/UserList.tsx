@@ -9,9 +9,12 @@ import { User } from '../types/user';
 import { ApiError } from '../types/api';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/Button';
+import { useFirstLoad } from '../hooks/useFirstLoad';
 
 const UserList = () => {
   const router = useRouter();
+  const isFirstLoad = useFirstLoad('userList');
+  const [initialLoading, setInitialLoading] = useState(isFirstLoad);
   const [users, setUsers] = useState<User[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -97,6 +100,13 @@ const UserList = () => {
   // Initial load effect
 
   useEffect(() => {
+    if (!isFirstLoad) {
+      loadUsers(1);
+    }
+  }, [loadUsers, isFirstLoad]);
+
+  const handleLoadingComplete = useCallback(() => {
+    setInitialLoading(false);
     loadUsers(1);
   }, [loadUsers]);
 
@@ -133,6 +143,14 @@ const UserList = () => {
       resizeObserver.disconnect();
     };
   }, [page, hasMore, checkShouldLoadMore, loadUsers]);
+
+  if (initialLoading) {
+    return (
+      <main className="min-h-screen flex items-center justify-center">
+        <Loading useTimer onComplete={handleLoadingComplete} className="h-16" />
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gray-50">
