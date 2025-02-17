@@ -9,12 +9,10 @@ import { User } from '../types/user';
 import { ApiError } from '../types/api';
 import { useRouter } from 'next/navigation';
 import { Button } from './ui/Button';
-import { useFirstLoad } from '../hooks/useFirstLoad';
 
 const UserList = () => {
   const router = useRouter();
-  const isFirstLoad = useFirstLoad('userList');
-  const [initialLoading, setInitialLoading] = useState(isFirstLoad);
+  const [initialLoading, setInitialLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
@@ -100,10 +98,10 @@ const UserList = () => {
   // Initial load effect
 
   useEffect(() => {
-    if (!isFirstLoad) {
+    if (!initialLoading) {
       loadUsers(1);
     }
-  }, [loadUsers, isFirstLoad]);
+  }, [loadUsers, initialLoading]);
 
   const handleLoadingComplete = useCallback(() => {
     setInitialLoading(false);
