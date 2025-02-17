@@ -27,6 +27,7 @@ export function PasswordStrength({ password }: PasswordStrengthProps) {
     <div className="mt-1">
       <div className="h-1 w-full bg-gray-200 rounded-full">
         <div
+          role="progressbar"
           className={`h-1 rounded-full transition-all duration-300 ${getColor()}`}
           style={{ width }}
         />
