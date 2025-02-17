@@ -190,11 +190,11 @@ const UserList = () => {
           <Button
             onClick={scrollToTop}
             variant="ghost"
-            className="fixed bottom-6 right-6 bg-white rounded-full shadow-lg hover:shadow-xl"
+            className="fixed bottom-6 right-6 w-12 h-12 bg-gray-100/90 hover:bg-gray-200/90 rounded-full shadow-lg hover:shadow-xl grid place-items-center"
             aria-label="Scroll to top"
             icon={
               <svg
-                className="w-6 h-6 text-gray-600"
+                className="w-5 h-5 text-gray-700"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

@@ -21,9 +21,10 @@ const UserDetail = ({ user }: UserDetailProps) => {
           <Button
             onClick={() => router.back()}
             variant="ghost"
+            className="p-2"
             icon={
               <svg
-                className="w-6 h-6"
+                className="w-5 h-5 text-gray-600"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"

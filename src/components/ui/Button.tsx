@@ -45,9 +45,12 @@ export function Button({
   const buttonClasses = clsx(
     baseStyles,
     variants[variant],
-    sizes[size],
+    // Only apply default padding if not icon-only button
+    (!icon || children) && sizes[size],
     fullWidth && 'w-full',
     disabled && 'opacity-50 cursor-not-allowed',
+    // Add minimal padding for icon-only buttons if no custom padding provided
+    !children && icon && !className?.includes('p-') && 'p-2',
     className,
   );
 
@@ -79,10 +82,12 @@ export function Button({
         </svg>
       )}
       {icon && iconPosition === 'left' && !isLoading && (
-        <span className="mr-2">{icon}</span>
+        <span className={children ? 'mr-2' : ''}>{icon}</span>
       )}
       {children}
-      {icon && iconPosition === 'right' && <span className="ml-2">{icon}</span>}
+      {icon && iconPosition === 'right' && (
+        <span className={children ? 'ml-2' : ''}>{icon}</span>
+      )}
     </button>
   );
 }
