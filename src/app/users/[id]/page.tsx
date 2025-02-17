@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import UserDetail from '@/components/UserDetail';
 import Loading from '@/components/Loading';
 import { User } from '@/types/user';
 import { fetchUserById } from '@/services/api';
+import { useEffect, useState } from 'react';
 
 export default function UserDetailPage() {
   const { id } = useParams();
