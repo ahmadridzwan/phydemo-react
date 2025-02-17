@@ -17,8 +17,8 @@ export default function UserDetailPage() {
       try {
         const userData = await fetchUserById(id as string);
         setUser(userData);
-      } catch (error) {
-        setError(`Failed to load user details. Error: ${error}`);
+      } catch {
+        setError(`Failed to load user details.`);
       }
     };
 

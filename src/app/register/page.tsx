@@ -16,8 +16,8 @@ export default function Register() {
       await signUp(data.email, data.password);
       router.push('/');
       router.refresh();
-    } catch (error) {
-      setError(`Failed to create account. Error: ${error}`);
+    } catch {
+      setError(`Failed to create account.`);
     }
   };
 

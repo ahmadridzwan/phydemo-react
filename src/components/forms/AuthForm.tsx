@@ -22,9 +22,9 @@ export function AuthForm({ onSubmit, type, error }: AuthFormProps) {
   const handleSubmit = async (data: AuthFormData) => {
     try {
       await onSubmit(data);
-    } catch (error) {
+    } catch {
       methods.setError('root', {
-        message: `An error occurred during submission. Error: ${error}`,
+        message: `An error occurred during submission.`,
       });
     }
   };
