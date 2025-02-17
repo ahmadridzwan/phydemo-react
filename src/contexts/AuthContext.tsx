@@ -54,7 +54,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (error) throw error;
       if (data.user) {
         setUser(data.user);
-        router.push('/');
+        router.push('/users');
       }
     } catch (error) {
       throw error;

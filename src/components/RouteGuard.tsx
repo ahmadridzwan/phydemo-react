@@ -4,10 +4,10 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect } from 'react';
 
-const publicPaths = ['/', '/login', '/register'];
+const publicPaths = ['/login', '/register'];
 
 const isPublicPath = (path: string) => {
-  return publicPaths.includes(path);
+  return publicPaths.includes(path) || path === '/';
 };
 
 export function RouteGuard({ children }: { children: React.ReactNode }) {
@@ -16,19 +16,13 @@ export function RouteGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
 
   useEffect(() => {
-    const handleNavigation = async () => {
-      if (!loading) {
-        if (!user && !isPublicPath(pathname)) {
-          router.replace('/login');
-          return;
-        } else if (user && isPublicPath(pathname)) {
-          router.replace('/');
-          return;
-        }
+    if (!loading) {
+      if (user && pathname === '/') {
+        router.replace('/users');
+      } else if (!user && !isPublicPath(pathname)) {
+        router.replace('/login');
       }
-    };
-
-    handleNavigation();
+    }
   }, [user, loading, pathname, router]);
 
   if (loading) {
