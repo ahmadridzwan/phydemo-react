@@ -1,8 +1,8 @@
-# Phygrid React App
+# Phydemo React App
 
-This is Phygrid React App made with [Next.js](https://nextjs.org) and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is Phydemo React App made with [Next.js](https://nextjs.org) and bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A live demo site is available on [https://phygrid.ahmadridzwan.com](https://phygrid.ahmadridzwan.com).
+A live demo site is available on [https://phydemo.ahmadridzwan.com](https://phydemo.ahmadridzwan.com).
 
 ## Project Features
 
@@ -29,7 +29,7 @@ This application was built to integrate with [Supabase](https://supabase.com/) a
 To run the development server locally, follow these steps:
 
 1. Clone this git repository by running within your desired directory:
-   `git clone https://github.com/ahmadridzwan/phygrid-react.git`
+   `git clone https://github.com/ahmadridzwan/Phydemo-react.git`
 2. Create a `.env` file at the root of your project (e.g. `.env.local`) and include the following contents:
 
    ```
