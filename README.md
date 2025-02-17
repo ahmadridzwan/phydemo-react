@@ -47,6 +47,7 @@ To run the development server locally, follow these steps:
 ## Project Roadmap
 
 - Add test specifications for the remaining components
+- Improve error handling and error boundaries
 - Various performance optimisations
 - Add search function
 - Add remaining CRUD operations; add, update, and delete
@@ -54,3 +55,4 @@ To run the development server locally, follow these steps:
 - Implement Github Action or other CI/CD tool to integrate with Vercel
 - Optimize for iOS Safari (and possibly other mobile browsers); Safari treats the loading MP4 file as video and sometimes goes into Picture in Picture mode
 - Optimize loading animation and asset
+- Update or migrate from deprecated packages
